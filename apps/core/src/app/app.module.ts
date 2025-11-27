@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
 import { APP_GUARD } from '@nestjs/core';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { AdminModule } from './admin/admin.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AssessmentModule } from './assessment/assessment.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { RolesGuard } from './auth/guards/roles.guard';
 import { QuestionBankModule } from './question-bank/question-bank.module';
 import { RankingModule } from './ranking/ranking.module';
-import { AuthModule } from './auth/auth.module';
-import { AdminModule } from './admin/admin.module';
+import { Account } from './shared/models/account';
 import { AnswerOption } from './shared/models/answer-option';
 import { AssessmentTemplate } from './shared/models/assessment-template';
 import { AssessmentTemplateQuestion } from './shared/models/assessment-template-question';
@@ -16,9 +19,6 @@ import { AttemptAnswer } from './shared/models/attempt-answer';
 import { Category } from './shared/models/category';
 import { Question } from './shared/models/question';
 import { Topic } from './shared/models/topic';
-import { Account } from './shared/models/account';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
-import { RolesGuard } from './auth/guards/roles.guard';
 
 @Module({
   imports: [
