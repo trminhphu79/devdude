@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AssessmentModule } from './assessment/assessment.module';
 import { QuestionBankModule } from './question-bank/question-bank.module';
 import { RankingModule } from './ranking/ranking.module';
+import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
 import { AnswerOption } from './shared/models/answer-option';
 import { AssessmentTemplate } from './shared/models/assessment-template';
 import { AssessmentTemplateQuestion } from './shared/models/assessment-template-question';
@@ -13,15 +16,17 @@ import { AttemptAnswer } from './shared/models/attempt-answer';
 import { Category } from './shared/models/category';
 import { Question } from './shared/models/question';
 import { Topic } from './shared/models/topic';
-import { User } from './shared/models/user';
-import { UserModule } from './user/user.module';
+import { Account } from './shared/models/account';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { RolesGuard } from './auth/guards/roles.guard';
 
 @Module({
   imports: [
     QuestionBankModule,
     RankingModule,
     AssessmentModule,
-    UserModule,
+    AuthModule,
+    AdminModule,
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST || 'localhost',
@@ -36,7 +41,7 @@ import { UserModule } from './user/user.module';
         Question,
         AnswerOption,
         AssessmentTemplateQuestion,
-        User,
+        Account,
         Attempt,
         AttemptAnswer,
       ],
@@ -46,6 +51,16 @@ import { UserModule } from './user/user.module';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {}

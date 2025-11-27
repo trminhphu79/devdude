@@ -11,3 +11,7 @@ export * from './add-question-to-template.dto';
 export * from './create-attempt.dto';
 export * from './submit-answer.dto';
 export * from './generate-template-questions.dto';
+export * from './register-user.dto';
+export * from './login-admin.dto';
+export * from './create-admin.dto';
+export * from './update-account.dto';

@@ -7,13 +7,13 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { User } from './user';
+import { Account } from './account';
 import { AssessmentTemplate } from './assessment-template';
 import { AttemptAnswer } from './attempt-answer';
 
 @Table({
   tableName: 'attempts',
-  timestamps: false,
+  timestamps: true,
   underscored: true,
 })
 export class Attempt extends Model {
@@ -24,16 +24,16 @@ export class Attempt extends Model {
   })
   id: string;
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Account)
   @Column({
     type: DataType.UUID,
     allowNull: false,
-    field: 'user_id',
+    field: 'account_id',
   })
-  userId: string;
+  accountId: string;
 
-  @BelongsTo(() => User)
-  user: User;
+  @BelongsTo(() => Account)
+  account: Account;
 
   @ForeignKey(() => AssessmentTemplate)
   @Column({
