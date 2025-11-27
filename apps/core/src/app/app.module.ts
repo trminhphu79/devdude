@@ -1,28 +1,26 @@
 import { Module } from '@nestjs/common';
+import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TopicModule } from './topic/topic.module';
-import { QuestionModule } from './question/question.module';
-import { AttemptModule } from './attempt/attempt.module';
-import { UserModule } from './user/user.module';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Topic } from './shared/models/topic';
-import { Category } from './shared/models/category';
-import { AssessmentTemplate } from './shared/models/assessment-template';
-import { Question } from './shared/models/question';
+import { AssessmentModule } from './assessment/assessment.module';
+import { QuestionBankModule } from './question-bank/question-bank.module';
+import { RankingModule } from './ranking/ranking.module';
 import { AnswerOption } from './shared/models/answer-option';
+import { AssessmentTemplate } from './shared/models/assessment-template';
 import { AssessmentTemplateQuestion } from './shared/models/assessment-template-question';
-import { User } from './shared/models/user';
 import { Attempt } from './shared/models/attempt';
 import { AttemptAnswer } from './shared/models/attempt-answer';
-import { CategoryModule } from './category/category.module';
+import { Category } from './shared/models/category';
+import { Question } from './shared/models/question';
+import { Topic } from './shared/models/topic';
+import { User } from './shared/models/user';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    TopicModule,
-    CategoryModule,
-    QuestionModule,
-    AttemptModule,
+    QuestionBankModule,
+    RankingModule,
+    AssessmentModule,
     UserModule,
     SequelizeModule.forRoot({
       dialect: 'postgres',
