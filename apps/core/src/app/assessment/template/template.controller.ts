@@ -18,7 +18,7 @@ import {
   GenerateTemplateQuestionsDto,
 } from '@devdue/common';
 
-@ApiTags('templates')
+@ApiTags('Template')
 @Controller('template')
 export class TemplateController {
   constructor(private readonly templateService: TemplateService) {}
