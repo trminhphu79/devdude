@@ -50,14 +50,14 @@ async function bootstrap() {
     )
     .addTag('Auth')
     .addTag('Admin - Accounts')
-    .addTag('User')
     .addTag('Topic')
     .addTag('Category')
     .addTag('Question')
     .addTag('Template')
-    .addTag('TemplateOption')
     .addTag('Attempt')
     .addTag('AttemptAnswer')
+    .addTag('Ranking')
+    .addTag('Score')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, documentFactory);

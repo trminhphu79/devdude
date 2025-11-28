@@ -1,5 +1,8 @@
 export * from './create-topic.dto';
 export * from './update-topic.dto';
+export * from './update-attempt.dto';
+export * from './submit-answers.dto';
+
 export * from './create-category.dto';
 export * from './update-category.dto';
 export * from './create-question.dto';
