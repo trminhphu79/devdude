@@ -1,106 +1,113 @@
-# Devdude
+Author: Phu Tran, Khoi Tran
+
+LinkedIn: https://www.linkedin.com/in/tmp-dev79/
+
+# DevDude Platform
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+**DevDude** is a comprehensive assessment and learning platform designed to facilitate skill evaluation and management. It is built as a modern monorepo using **Nx**, combining a robust **NestJS** backend with a dynamic **Angular** frontend.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## 🏗️ Architecture
 
-## Run tasks
+The project follows a **Monorepo** architecture managed by [Nx](https://nx.dev), allowing for efficient code sharing and unified tooling.
 
-To run the dev server for your app, use:
+### Tech Stack
+
+- **Monorepo Tooling**: Nx
+- **Backend (`apps/core`)**:
+  - Framework: [NestJS](https://nestjs.com/)
+  - ORM: [Sequelize](https://sequelize.org/) (TypeScript)
+  - Database: PostgreSQL
+  - Authentication: Passport (JWT)
+  - Documentation: Swagger / OpenAPI
+- **Frontend (`apps/platform`)**:
+  - Framework: [Angular](https://angular.io/)
+  - Styling: [TailwindCSS](https://tailwindcss.com/)
+- **Shared (`libs/common`)**: Shared interfaces, types, and utilities used across both frontend and backend.
+- **Containerization**: Docker & Docker Compose
+
+## 🌍 Domain & Modules
+
+The application is structured around key domain areas, primarily located in the `core` backend service:
+
+- **Auth**: Handles user authentication, registration, and security (JWT strategy).
+- **Question Bank**: Manages the repository of questions, topics, and categories for assessments.
+- **Assessment**: Core logic for creating, managing, and taking assessments/tests.
+- **Evaluation**: Handles the grading logic, scoring, and ranking of assessment results.
+- **Admin**: Administrative interfaces and logic for system management.
+
+## 📂 Project Structure
+
+```text
+devdude/
+├── apps/
+│   ├── core/           # NestJS Backend Application
+│   ├── platform/       # Angular Frontend Application
+│   └── core-e2e/       # End-to-End Tests for Core
+├── libs/
+│   └── common/         # Shared libraries (types, utils)
+├── tools/              # Workspace scripts and tools
+├── docker-compose.yml  # Docker composition for local dev
+└── nx.json             # Nx Configuration
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (LTS recommended)
+- Docker & Docker Compose (for database and full stack execution)
+
+### Installation
 
 ```sh
+npm install
+```
+
+### Running the Application
+
+**1. Start the Backend & Database (Docker)**
+
+You can run the backend and database using Docker Compose:
+
+```sh
+npm run start:api
+# OR
+nx build core && docker-compose --env-file .env up -d --build
+```
+
+**2. Start the Frontend**
+
+```sh
+npm start
+# OR
 npx nx serve platform
 ```
 
-To create a production bundle:
+### Running Tests
+
+To run unit tests for the core application:
 
 ```sh
-npx nx build platform
+npm test
+# OR
+npx nx test core --coverage
 ```
 
-To see all available targets to run for a project, run:
+## 🛠️ Nx Commands
 
-```sh
-npx nx show project platform
-```
+Here are some useful Nx commands for managing the workspace:
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+- **Run Dev Server**: `npx nx serve platform`
+- **Build Production**: `npx nx build platform`
+- **Show Project Details**: `npx nx show project platform`
+- **Run Graph**: `npx nx graph` (Visually explore the project structure)
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Generating Code
 
-## Add new projects
+- **Generate App**: `npx nx g @nx/angular:app demo`
+- **Generate Lib**: `npx nx g @nx/angular:lib mylib`
+- **Generate Nest Resource**: `npx nx g @nx/nest:resource users --project=core`
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/angular:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/angular:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-nx g @nx/nest:module apps/core/src/app/attempt-answer/attempt-answer &&
-nx g @nx/nest:controller apps/core/src/app/attempt-answer/attempt-answer &&
-nx g @nx/nest:service apps/core/src/app/attempt-answer/attempt-answer
+[Learn more about Nx](https://nx.dev)
