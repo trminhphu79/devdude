@@ -2,7 +2,13 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { JwtService } from '@nestjs/jwt';
 import { getModelToken } from '@nestjs/sequelize';
 import { UnauthorizedException, ConflictException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
+
+jest.mock('bcrypt', () => ({
+  compare: jest.fn(),
+  hash: jest.fn(),
+}));
 import { AuthService } from './auth.service';
 import { Account } from '../shared/models/account';
 import { RegisterUserDto, LoginAdminDto, UserRole } from '@devdue/common';
@@ -39,6 +45,20 @@ describe('AuthService', () => {
           provide: JwtService,
           useValue: {
             sign: jest.fn().mockReturnValue('mock-token'),
+          },
+        },
+        {
+          provide: ConfigService,
+          useValue: {
+            get: jest.fn((key: string) => {
+              const config = {
+                'app.jwt.secret': 'test-secret',
+                'app.jwt.refreshSecret': 'test-refresh-secret',
+                'app.jwt.accessTokenExpiry': '15m',
+                'app.jwt.refreshTokenExpiry': '7d',
+              };
+              return config[key];
+            }),
           },
         },
       ],
@@ -99,9 +119,8 @@ describe('AuthService', () => {
 
     it('should login admin successfully', async () => {
       // Mock bcrypt compare
-      jest
-        .spyOn(bcrypt, 'compare')
-        .mockImplementation(() => Promise.resolve(true));
+      // Mock bcrypt compare
+      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
 
       mockAccountModel.findOne.mockResolvedValue({
         ...mockAccount,
@@ -125,9 +144,7 @@ describe('AuthService', () => {
     });
 
     it('should throw UnauthorizedException if password is invalid', async () => {
-      jest
-        .spyOn(bcrypt, 'compare')
-        .mockImplementation(() => Promise.resolve(false));
+      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
       mockAccountModel.findOne.mockResolvedValue({
         ...mockAccount,

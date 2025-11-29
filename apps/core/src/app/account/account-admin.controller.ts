@@ -19,12 +19,12 @@ import {
 } from '@nestjs/swagger';
 import { AccountAdminService } from './account-admin.service';
 import { CreateAdminDto, UpdateAccountDto, UserRole } from '@devdue/common';
-import { Roles } from '../../auth/decorators/roles.decorator';
+import { Roles } from '../auth/decorators/roles.decorator';
 
-@ApiTags('Admin - Accounts')
-@ApiBearerAuth('JWT-auth')
+@ApiTags('Accounts')
+@ApiBearerAuth('X-Access-Token')
 @Roles(UserRole.ADMIN)
-@Controller('admin/accounts')
+@Controller('accounts')
 export class AccountAdminController {
   constructor(private readonly accountAdminService: AccountAdminService) {}
 

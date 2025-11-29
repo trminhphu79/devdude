@@ -551,7 +551,7 @@ describe('TemplateService', () => {
       mockTemplateQuestionModel.destroy.mockResolvedValue(0);
 
       // Mock findAll to return all questions at once
-      mockQuestionModel.findAll.mockResolvedValueOnce(mockAllQuestions);
+      mockQuestionModel.findAll.mockResolvedValue(mockAllQuestions);
 
       mockTemplateQuestionModel.create.mockResolvedValue({});
 
@@ -701,7 +701,7 @@ describe('TemplateService', () => {
       mockTopicModel.findByPk.mockResolvedValue({ id: dto.topicId });
       mockCategoryModel.findAll.mockResolvedValue([{ id: dto.categoryIds[0] }]);
       mockTemplateQuestionModel.destroy.mockResolvedValue(0);
-      mockQuestionModel.findAll.mockResolvedValueOnce(mockAllQuestions);
+      mockQuestionModel.findAll.mockResolvedValue(mockAllQuestions);
 
       await expect(
         service.generateQuestionsForTemplate(templateId, dto)

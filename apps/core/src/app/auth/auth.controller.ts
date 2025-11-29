@@ -16,21 +16,19 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import {
-  RegisterUserDto,
-  LoginAdminDto,
-  CreateAdminDto,
-  UserRole,
-} from '@devdue/common';
+import { RegisterUserDto, LoginAdminDto } from '@devdue/common';
 import { Public } from './decorators/public.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { Roles } from './decorators/roles.decorator';
 import { AuthGuard } from '@nestjs/passport';
+import { ConfigService } from '../shared/configs';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly configService: ConfigService
+  ) {}
 
   @Public()
   @Post('register')
@@ -88,7 +86,6 @@ export class AuthController {
   ) {
     const result = await this.authService.refreshTokens(user.id);
 
-    // Set new refresh token in httpOnly cookie
     this.setRefreshTokenCookie(response, result.refreshToken);
 
     return {
@@ -98,11 +95,10 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
-  @ApiBearerAuth('JWT-auth')
+  @ApiBearerAuth('X-Access-Token')
   @ApiOperation({ summary: 'Logout and clear refresh token cookie' })
   @ApiResponse({ status: 200, description: 'Logged out successfully' })
   async logout(@Res({ passthrough: true }) response: Response) {
-    // Clear refresh token cookie
     response.clearCookie('refreshToken', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -113,7 +109,7 @@ export class AuthController {
   }
 
   @Get('me')
-  @ApiBearerAuth('JWT-auth')
+  @ApiBearerAuth('X-Access-Token')
   @ApiOperation({ summary: 'Get current account information' })
   @ApiResponse({ status: 200, description: 'Account information retrieved' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -121,26 +117,12 @@ export class AuthController {
     return this.authService.getCurrentAccount(user.id);
   }
 
-  @Post('admin/create')
-  @Roles(UserRole.ADMIN)
-  @ApiBearerAuth('JWT-auth')
-  @ApiOperation({ summary: 'Create admin account (admin only)' })
-  @ApiResponse({ status: 201, description: 'Admin created successfully' })
-  @ApiResponse({ status: 403, description: 'Forbidden' })
-  @ApiResponse({ status: 409, description: 'Email already registered' })
-  async createAdmin(@Body() dto: CreateAdminDto) {
-    return this.authService.createAdmin(dto);
-  }
-
-  /**
-   * Helper method to set refresh token in httpOnly cookie
-   */
   private setRefreshTokenCookie(response: Response, refreshToken: string) {
     response.cookie('refreshToken', refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
+      secure: this.configService.get('app.nodeEnv') === 'production',
       sameSite: 'strict',
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      maxAge: this.configService.get('app.cookies.maxAgeRefreshToken'),
     });
   }
 }

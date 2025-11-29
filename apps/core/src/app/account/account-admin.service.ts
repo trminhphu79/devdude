@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcrypt';
-import { Account } from '../../shared/models/account';
+import { Account } from '../shared/models/account';
 import { CreateAdminDto, UpdateAccountDto } from '@devdue/common';
 import { Op } from 'sequelize';
 

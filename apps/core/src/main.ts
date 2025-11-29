@@ -8,22 +8,22 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import { AppModule } from './app/app.module';
+import { ConfigService } from './app/shared/configs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 
-  // Enable CORS with credentials for cookies
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:4200',
+    origin: configService.get('app.frontendUrl'),
     credentials: true,
   });
 
-  // Use cookie parser for refresh tokens
   app.use(cookieParser());
 
-  // Enable validation globally
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -32,7 +32,6 @@ async function bootstrap() {
     })
   );
 
-  const port = process.env.PORT || 3000;
   const config = new DocumentBuilder()
     .setTitle('DevDude API')
     .setDescription('The DevDude API description')
@@ -46,10 +45,10 @@ async function bootstrap() {
         description: 'Enter JWT token',
         in: 'header',
       },
-      'JWT-auth' // This name will be used in @ApiBearerAuth() decorator
+      'X-Access-Token'
     )
     .addTag('Auth')
-    .addTag('Admin - Accounts')
+    .addTag('Accounts')
     .addTag('Topic')
     .addTag('Category')
     .addTag('Question')
@@ -62,6 +61,7 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, documentFactory);
 
+  const port = configService.get('app.port');
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`

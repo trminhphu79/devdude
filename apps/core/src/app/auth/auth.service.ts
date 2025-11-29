@@ -8,19 +8,16 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcrypt';
 import { Account } from '../shared/models/account';
-import {
-  RegisterUserDto,
-  LoginAdminDto,
-  CreateAdminDto,
-  UserRole,
-} from '@devdue/common';
+import { RegisterUserDto, LoginAdminDto, UserRole } from '@devdue/common';
+import { ConfigService } from '../shared/configs';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(Account)
     private accountModel: typeof Account,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private configService: ConfigService
   ) {}
 
   /**
@@ -108,40 +105,6 @@ export class AuthService {
   }
 
   /**
-   * Create admin account (for admin panel)
-   */
-  async createAdmin(dto: CreateAdminDto) {
-    // Check if email already exists
-    const existingAccount = await this.accountModel.findOne({
-      where: { email: dto.email },
-    });
-
-    if (existingAccount) {
-      throw new ConflictException('Email already registered');
-    }
-
-    // Hash password
-    const passwordHash = await bcrypt.hash(dto.password, 10);
-
-    // Create admin account
-    const account = await this.accountModel.create({
-      email: dto.email,
-      fullName: dto.fullName,
-      passwordHash,
-      role: dto.role,
-      isActive: true,
-    } as any);
-
-    return {
-      id: account.id,
-      email: account.email,
-      fullName: account.fullName,
-      role: account.role,
-      isActive: account.isActive,
-    };
-  }
-
-  /**
    * Refresh access token using refresh token
    */
   async refreshTokens(userId: string) {
@@ -194,15 +157,13 @@ export class AuthService {
     };
 
     const accessToken = this.jwtService.sign(payload, {
-      secret: process.env.JWT_SECRET || 'your-secret-key-change-in-production',
-      expiresIn: '15m',
+      secret: this.configService.get('app.jwt.secret'),
+      expiresIn: this.configService.get('app.jwt.accessTokenExpiry'),
     });
 
     const refreshToken = this.jwtService.sign(payload, {
-      secret:
-        process.env.JWT_REFRESH_SECRET ||
-        'your-refresh-secret-key-change-in-production',
-      expiresIn: '1d',
+      secret: this.configService.get('app.jwt.refreshSecret'),
+      expiresIn: this.configService.get('app.jwt.refreshTokenExpiry'),
     });
 
     return { accessToken, refreshToken };
