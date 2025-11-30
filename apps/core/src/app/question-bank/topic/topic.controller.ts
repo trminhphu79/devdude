@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { TopicService } from './topic.service';
-import { CreateTopicDto, UpdateTopicDto } from '@devdue/common';
+import { CreateTopicDto, UpdateTopicDto } from '@devdude/common';
 
 @Controller('topic')
 export class TopicController {

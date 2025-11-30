@@ -3,7 +3,7 @@ import { getModelToken } from '@nestjs/sequelize';
 import { NotFoundException } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from '../../shared/models/category';
-import { CreateCategoryDto, UpdateCategoryDto } from '@devdue/common';
+import { CreateCategoryDto, UpdateCategoryDto } from '@devdude/common';
 
 const mockCategoryModel = {
   create: jest.fn(),

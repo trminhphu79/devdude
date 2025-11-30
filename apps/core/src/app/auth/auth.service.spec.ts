@@ -11,7 +11,7 @@ jest.mock('bcrypt', () => ({
 }));
 import { AuthService } from './auth.service';
 import { Account } from '../shared/models/account';
-import { RegisterUserDto, LoginAdminDto, UserRole } from '@devdue/common';
+import { RegisterUserDto, LoginAdminDto, UserRole } from '@devdude/common';
 
 describe('AuthService', () => {
   let service: AuthService;

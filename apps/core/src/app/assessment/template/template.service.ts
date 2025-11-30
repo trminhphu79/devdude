@@ -14,7 +14,7 @@ import {
   UpdateAssessmentTemplateDto,
   AddQuestionToTemplateDto,
   GenerateTemplateQuestionsDto,
-} from '@devdue/common';
+} from '@devdude/common/dtos';
 import { Op } from 'sequelize';
 
 @Injectable()

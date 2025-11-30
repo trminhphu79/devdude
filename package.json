@@ -6,7 +6,8 @@
     "start": "nx serve platform",
     "start:api": "nx build core && docker-compose --env-file .env up -d --build",
     "test": "nx test core --coverage",
-    "seed": "ts-node --project apps/core/tsconfig.app.json -r tsconfig-paths/register apps/core/src/seed.ts"
+    "seed": "ts-node --project apps/core/tsconfig.app.json -r tsconfig-paths/register apps/core/src/seed.ts",
+    "gen:comp": "nx g @nx/angular:component apps/platform/src//shared/uis/layout/portal-header"
   },
   "private": true,
   "dependencies": {

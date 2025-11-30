@@ -6,7 +6,7 @@ import {
   UpdateAssessmentTemplateDto,
   AddQuestionToTemplateDto,
   GenerateTemplateQuestionsDto,
-} from '@devdue/common';
+} from '@devdude/common';
 
 const mockTemplateService = {
   create: jest.fn(),

@@ -5,7 +5,7 @@ import {
   CreateAttemptDto,
   SubmitAnswersDto,
   UpdateAttemptDto,
-} from '@devdue/common';
+} from '@devdude/common/dtos';
 
 describe('AttemptController', () => {
   let controller: AttemptController;

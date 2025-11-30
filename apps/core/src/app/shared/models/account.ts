@@ -7,7 +7,7 @@ import {
   Index,
 } from 'sequelize-typescript';
 import { Attempt } from './attempt';
-import { UserRole } from '@devdue/common';
+import { UserRole } from '@devdude/common';
 
 @Table({
   tableName: 'accounts',

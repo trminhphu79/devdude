@@ -10,7 +10,7 @@ import {
   QuestionType,
   DifficultyLevel,
   UpdateQuestionDto,
-} from '@devdue/common';
+} from '@devdude/common';
 
 const mockTransaction = {
   commit: jest.fn(),

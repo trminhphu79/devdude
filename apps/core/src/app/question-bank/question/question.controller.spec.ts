@@ -6,7 +6,7 @@ import {
   QuestionType,
   DifficultyLevel,
   UpdateQuestionDto,
-} from '@devdue/common';
+} from '@devdude/common';
 
 const mockQuestionService = {
   create: jest.fn(),

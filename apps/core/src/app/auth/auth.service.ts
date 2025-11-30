@@ -8,8 +8,9 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcrypt';
 import { Account } from '../shared/models/account';
-import { RegisterUserDto, LoginAdminDto, UserRole } from '@devdue/common';
+import { RegisterUserDto, LoginAdminDto } from '@devdude/common/dtos';
 import { ConfigService } from '../shared/configs';
+import { UserRole } from '@devdude/common/enums';
 
 @Injectable()
 export class AuthService {

@@ -12,7 +12,7 @@ import {
   UpdateAssessmentTemplateDto,
   AddQuestionToTemplateDto,
   GenerateTemplateQuestionsDto,
-} from '@devdue/common';
+} from '@devdude/common/dtos';
 
 const mockAssessmentTemplateModel = {
   create: jest.fn(),

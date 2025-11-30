@@ -10,7 +10,7 @@ import {
   CreateAttemptDto,
   SubmitAnswersDto,
   UpdateAttemptDto,
-} from '@devdue/common';
+} from '@devdude/common/dtos';
 
 const mockAttempt = {
   id: 'attempt-id',

@@ -16,7 +16,7 @@ import {
   UpdateAssessmentTemplateDto,
   AddQuestionToTemplateDto,
   GenerateTemplateQuestionsDto,
-} from '@devdue/common';
+} from '@devdude/common/dtos';
 
 @ApiTags('Template')
 @Controller('template')

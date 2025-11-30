@@ -18,7 +18,7 @@ import {
   ApiQuery,
 } from '@nestjs/swagger';
 import { AccountAdminService } from './account-admin.service';
-import { CreateAdminDto, UpdateAccountDto, UserRole } from '@devdue/common';
+import { CreateAdminDto, UpdateAccountDto, UserRole } from '@devdude/common';
 import { Roles } from '../auth/decorators/roles.decorator';
 
 @ApiTags('Accounts')

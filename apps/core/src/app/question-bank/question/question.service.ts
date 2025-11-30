@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Question } from '../../shared/models/question';
 import { AnswerOption } from '../../shared/models/answer-option';
-import { CreateQuestionDto, UpdateQuestionDto } from '@devdue/common';
+import { CreateQuestionDto, UpdateQuestionDto } from '@devdude/common';
 import { Sequelize } from 'sequelize-typescript';
 
 @Injectable()

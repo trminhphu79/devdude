@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { Account } from './app/shared/models/account';
-import { UserRole } from '@devdue/common';
+import { UserRole } from '@devdude/common';
 import * as bcrypt from 'bcrypt';
 import { Logger } from '@nestjs/common';
 

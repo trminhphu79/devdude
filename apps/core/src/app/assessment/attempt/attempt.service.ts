@@ -7,7 +7,7 @@ import {
   CreateAttemptDto,
   SubmitAnswersDto,
   UpdateAttemptDto,
-} from '@devdue/common';
+} from '@devdude/common/dtos';
 import { AssessmentTemplate } from '../../shared/models/assessment-template';
 
 @Injectable()

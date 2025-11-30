@@ -12,7 +12,7 @@ import {
   CreateAttemptDto,
   UpdateAttemptDto,
   SubmitAnswersDto,
-} from '@devdue/common';
+} from '@devdude/common/dtos';
 
 @Controller('attempt')
 export class AttemptController {

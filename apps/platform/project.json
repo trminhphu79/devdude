@@ -19,9 +19,18 @@
           {
             "glob": "**/*",
             "input": "apps/platform/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/@taiga-ui/icons/src",
+            "output": "assets/taiga-ui/icons"
           }
         ],
-        "styles": ["apps/platform/src/styles.scss"],
+        "styles": [
+          "apps/platform/src/styles.scss",
+          "@taiga-ui/core/styles/taiga-ui-theme.less",
+          "@taiga-ui/core/styles/taiga-ui-fonts.less"
+        ],
         "server": "apps/platform/src/main.server.ts",
         "ssr": {
           "entry": "apps/platform/src/server.ts"
