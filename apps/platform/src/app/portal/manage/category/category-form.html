@@ -1,0 +1,139 @@
+<div class="max-w-2xl mx-auto">
+  <!-- Header -->
+  <div class="mb-8">
+    <div class="flex items-center gap-4 mb-2">
+      <a
+        routerLink="/portal/manage/category"
+        class="flex items-center justify-center h-8 w-8 rounded-full hover:bg-white/5 text-gray-400 hover:text-white transition-colors"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+      </a>
+      <h2 class="text-2xl font-bold text-white">
+        {{ categoryId() ? 'Edit Category' : 'Create Category' }}
+      </h2>
+    </div>
+    <p class="text-sm text-gray-400 ml-12">
+      Categorize your questions under a specific topic.
+    </p>
+  </div>
+
+  @if (isLoading()) {
+  <div class="flex flex-col gap-4 animate-pulse">
+    <div class="h-10 w-full bg-white/5 rounded-lg"></div>
+    <div class="h-32 w-full bg-white/5 rounded-lg"></div>
+  </div>
+  } @else {
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- Card -->
+    <div class="rounded-xl bg-slate-900/50 border border-white/5 p-6 space-y-6">
+      <!-- Topic Selection -->
+      <div class="space-y-2">
+        <label for="topicId" class="block text-sm font-medium text-gray-300">
+          Topic <span class="text-red-400">*</span>
+        </label>
+        <select
+          id="topicId"
+          formControlName="topicId"
+          class="w-full rounded-lg border bg-slate-950 border-white/10 px-4 py-3 text-white placeholder-gray-600 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none transition-all appearance-none"
+        >
+          <option value="" disabled>Select a topic</option>
+          @for (topic of topics(); track topic.id) {
+          <option [value]="topic.id">{{ topic.name }}</option>
+          }
+        </select>
+        @if (form.get('topicId')?.invalid && form.get('topicId')?.touched) {
+        <p class="text-xs text-red-400">Please select a topic</p>
+        }
+      </div>
+
+      <!-- Name -->
+      <div class="space-y-2">
+        <label for="name" class="block text-sm font-medium text-gray-300">
+          Category Name <span class="text-red-400">*</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="w-full rounded-lg border bg-slate-950 border-white/10 px-4 py-3 text-white placeholder-gray-600 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none transition-all"
+          placeholder="e.g. Arrays and Strings"
+        />
+        @if (form.get('name')?.invalid && form.get('name')?.touched) {
+        <p class="text-xs text-red-400">Name is required</p>
+        }
+      </div>
+
+      <!-- Description -->
+      <div class="space-y-2">
+        <label
+          for="description"
+          class="block text-sm font-medium text-gray-300"
+        >
+          Description <span class="text-red-400">*</span>
+        </label>
+        <textarea
+          id="description"
+          rows="4"
+          formControlName="description"
+          class="w-full rounded-lg border bg-slate-950 border-white/10 px-4 py-3 text-white placeholder-gray-600 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 focus:outline-none transition-all"
+          placeholder="Describe what this category covers..."
+        ></textarea>
+        @if (form.get('description')?.invalid &&
+        form.get('description')?.touched) {
+        <p class="text-xs text-red-400">Description is required</p>
+        }
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end gap-3 pt-4">
+      <a
+        routerLink="/portal/manage/category"
+        class="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
+      >
+        Cancel
+      </a>
+      <button
+        type="submit"
+        [disabled]="isSaving()"
+        class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:bg-indigo-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+      >
+        @if (isSaving()) {
+        <svg
+          class="animate-spin h-4 w-4 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        Saving... } @else { {{ categoryId() ? 'Update Category' : 'Create
+        Category' }} }
+      </button>
+    </div>
+  </form>
+  }
+</div>

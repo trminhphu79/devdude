@@ -8,19 +8,21 @@ import {
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, filter, retry, switchMap, take } from 'rxjs/operators';
+import { catchError, filter, switchMap, take, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { AdminAuthStore } from '../store/admin-auth';
 
 let isRefreshing = false;
-const refreshTokenSubject = new BehaviorSubject<string | null>(null);
+let refreshTokenSubject = new BehaviorSubject<string | null>(null);
 
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> => {
+  const authStore = inject(AdminAuthStore);
+  const token = authStore.state().accessToken;
   const authService = inject(AuthService);
   const router = inject(Router);
-  const token = localStorage.getItem('token');
 
   if (token) {
     req = addToken(req, token);
@@ -28,20 +30,25 @@ export const authInterceptor: HttpInterceptorFn = (
 
   return next(req).pipe(
     catchError((error) => {
-      if (isAuthorizationError(error)) {
-        return handle403Error(req, next, authService, router);
+      // Don't try to refresh if the failed request is already for login or refresh
+      if (
+        req.url.includes('/auth/admin/login') ||
+        req.url.includes('/auth/refresh')
+      ) {
+        return throwError(() => error);
+      }
+
+      if (
+        error instanceof HttpErrorResponse &&
+        (error.status === 401 || error.status === 403)
+      ) {
+        return handle401Error(req, next, authService, router, authStore);
       }
       return throwError(() => error);
     })
   );
 };
 
-const isAuthorizationError = (error: HttpErrorResponse) => {
-  return (
-    (error instanceof HttpErrorResponse && error.status === 401) ||
-    error.status === 403
-  );
-};
 const addToken = (req: HttpRequest<unknown>, token: string) => {
   return req.clone({
     setHeaders: {
@@ -50,32 +57,34 @@ const addToken = (req: HttpRequest<unknown>, token: string) => {
   });
 };
 
-const handle403Error = (
+const handle401Error = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn,
   authService: AuthService,
-  router: Router
+  router: Router,
+  authStore: AdminAuthStore
 ): Observable<HttpEvent<unknown>> => {
   if (!isRefreshing) {
     isRefreshing = true;
-    refreshTokenSubject.next(null);
+    refreshTokenSubject = new BehaviorSubject<string | null>(null);
 
     return authService.refreshToken().pipe(
-      retry(3),
       switchMap((response: any) => {
         isRefreshing = false;
         const newToken = response.accessToken;
-        if (newToken) {
-          localStorage.setItem('token', newToken);
-          refreshTokenSubject.next(newToken);
-          return next(addToken(req, newToken));
-        }
-        return throwError(() => new Error('No token in refresh response'));
+        authStore.setAccessToken(newToken);
+        refreshTokenSubject.next(newToken);
+        return next(addToken(req, newToken));
       }),
       catchError((err) => {
         isRefreshing = false;
-        localStorage.removeItem('token');
-        router.navigate(['/portal/auth']);
+        authStore.clear();
+        // Use setTimeout to ensure navigation happens after the error propagation cycle
+        setTimeout(() => router.navigate(['/auth']), 0);
+
+        // Error out any waiting requests
+        refreshTokenSubject.error(err);
+
         return throwError(() => err);
       })
     );

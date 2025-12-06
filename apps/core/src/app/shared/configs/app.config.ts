@@ -28,7 +28,7 @@ export default registerAs('app', () => ({
   // Cookies
   cookies: {
     maxAgeRefreshToken: parseInt(
-      process.env.MAX_AGE_REFRESH_TOKEN || '604800000', // 7 days in ms
+      process.env.MAX_AGE_REFRESH_TOKEN || '900000', //15mins
       10
     ),
   },

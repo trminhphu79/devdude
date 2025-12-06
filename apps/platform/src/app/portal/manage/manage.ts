@@ -1,14 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-portal-manage',
-  standalone: true,
+  imports: [RouterOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="p-4">
-      <h2 class="text-xl font-bold">Manage Content</h2>
-      <p>Manage categories, topics, and questions here.</p>
-    </div>
-  `,
+  template: `<router-outlet></router-outlet>`,
 })
 export class ManageComponent {}
