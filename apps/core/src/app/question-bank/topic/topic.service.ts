@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Topic } from '../../shared/models/topic';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateTopicDto, UpdateTopicDto } from '@devdude/common';
+import { CreateTopicDto, UpdateTopicDto } from '@devdude/common/dtos';
 
 @Injectable()
 export class TopicService {

@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
+import { AppLayout } from '../shared/uis/layout/layout';
 
 export const assessmentRoutes: Routes = [
   {
-    path: 'assessment',
-    loadComponent: () =>
-      import('./assessment').then((m) => m.AssessmentComponent),
+    path: '',
+    component: AppLayout,
     children: [
       {
         path: '',

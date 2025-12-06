@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { QuestionService } from './question.service';
-import { CreateQuestionDto, UpdateQuestionDto } from '@devdude/common';
+import { CreateQuestionDto, UpdateQuestionDto } from '@devdude/common/dtos';
 
 @ApiTags('Question')
 @Controller('question')

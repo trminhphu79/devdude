@@ -1,44 +1,121 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+
+interface GuideStep {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface AssessmentFeature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Topic {
+  id: string;
+  name: string;
+  icon: string;
+  category: string;
+  totalQuestions: number;
+  durationMinutes: number;
+  description: string;
+}
 
 @Component({
   selector: 'app-assessment-overview',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <div class="space-y-4">
-      <h2 class="text-xl font-bold">Your Progress</h2>
-      <div class="p-4 border rounded bg-gray-50">
-        <p class="text-center text-gray-500">
-          [Chart Placeholder: Attempts per Topic]
-        </p>
-      </div>
-
-      <h3 class="text-lg font-semibold">Pick a Topic to Start Quiz</h3>
-      <div class="flex gap-4">
-        <button
-          routerLink="quiz"
-          [queryParams]="{ topic: 'angular' }"
-          class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
-        >
-          FE - Angular
-        </button>
-        <button
-          routerLink="quiz"
-          [queryParams]="{ topic: 'react' }"
-          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-        >
-          FE - ReactJS
-        </button>
-        <button
-          routerLink="quiz"
-          [queryParams]="{ topic: 'flutter' }"
-          class="px-4 py-2 bg-cyan-500 text-white rounded hover:bg-cyan-600 transition"
-        >
-          Mobile - Flutter
-        </button>
-      </div>
-    </div>
-  `,
+  templateUrl: './overview.html',
+  styleUrl: './overview.scss',
 })
-export class OverviewComponent {}
+export class OverviewComponent {
+  topics: Topic[] = [
+    {
+      id: 'angular',
+      name: 'Frontend - Angular',
+      icon: '🅰️',
+      category: 'Frontend',
+      totalQuestions: 45,
+      durationMinutes: 60,
+      description:
+        'Test your Angular knowledge including components, services, RxJS, and best practices.',
+    },
+    {
+      id: 'react',
+      name: 'Frontend - ReactJS',
+      icon: '⚛️',
+      category: 'Frontend',
+      totalQuestions: 50,
+      durationMinutes: 75,
+      description:
+        'Assess your React skills including hooks, state management, and component architecture.',
+    },
+    {
+      id: 'flutter',
+      name: 'Mobile - Flutter',
+      icon: '📱',
+      category: 'Mobile',
+      totalQuestions: 40,
+      durationMinutes: 60,
+      description:
+        'Evaluate your Flutter expertise including widgets, state management, and mobile development.',
+    },
+  ];
+
+  guideSteps: GuideStep[] = [
+    {
+      icon: '📝',
+      title: 'Choose Your Topic',
+      description:
+        'Select from our comprehensive library of technical topics that match your interests and career goals.',
+    },
+    {
+      icon: '⏱️',
+      title: 'Take the Assessment',
+      description:
+        'Answer questions at your own pace. Each question is timed to simulate real interview conditions.',
+    },
+    {
+      icon: '📊',
+      title: 'Get Instant Results',
+      description:
+        'Receive detailed feedback on your performance, including your skill level and areas for improvement.',
+    },
+    {
+      icon: '🎯',
+      title: 'Track Your Progress',
+      description:
+        'Monitor your growth over time and see how you compare to other developers in the community.',
+    },
+  ];
+
+  features: AssessmentFeature[] = [
+    {
+      icon: '🎓',
+      title: 'Accurate Skill Assessment',
+      description:
+        'Our algorithm evaluates your answers to provide an accurate representation of your current skill level.',
+    },
+    {
+      icon: '💯',
+      title: 'Honest Results',
+      description:
+        'Be truthful in your answers - the assessment works best when you answer based on your actual knowledge.',
+    },
+    {
+      icon: '🔄',
+      title: 'Retake Anytime',
+      description:
+        'You can retake assessments to track your improvement and validate your learning progress.',
+    },
+    {
+      icon: '🏆',
+      title: 'Earn Certifications',
+      description:
+        'Achieve high scores to earn recognized certifications that validate your expertise.',
+    },
+  ];
+}

@@ -1,12 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { QuestionController } from './question.controller';
 import { QuestionService } from './question.service';
-import {
-  CreateQuestionDto,
-  QuestionType,
-  DifficultyLevel,
-  UpdateQuestionDto,
-} from '@devdude/common';
+import { CreateQuestionDto, UpdateQuestionDto } from '@devdude/common/dtos';
+import { DifficultyLevel, QuestionType } from '@devdude/common/enums';
 
 const mockQuestionService = {
   create: jest.fn(),

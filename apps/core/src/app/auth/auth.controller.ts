@@ -16,7 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { RegisterUserDto, LoginAdminDto } from '@devdude/common';
+import { RegisterUserDto, LoginAdminDto } from '@devdude/common/dtos';
 import { Public } from './decorators/public.decorator';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { AuthGuard } from '@nestjs/passport';

@@ -6,7 +6,7 @@ import {
 import { InjectModel } from '@nestjs/sequelize';
 import * as bcrypt from 'bcrypt';
 import { Account } from '../shared/models/account';
-import { CreateAdminDto, UpdateAccountDto } from '@devdude/common';
+import { CreateAdminDto, UpdateAccountDto } from '@devdude/common/dtos';
 import { Op } from 'sequelize';
 
 @Injectable()

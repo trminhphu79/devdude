@@ -1,0 +1,136 @@
+<div class="quiz-container">
+  <!-- Header with Timer and Progress -->
+  <div class="quiz-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-center gap-4 py-4"
+      >
+        <div class="flex items-center gap-4">
+          <div class="timer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span class="timer-text">{{ formattedTime }}</span>
+          </div>
+          <div class="question-counter">
+            Question {{ currentQuestionIndex() + 1 }} of {{ questions.length }}
+          </div>
+        </div>
+        <div class="progress-info">
+          <span class="text-sm text-[var(--text-secondary)]">
+            Answered: {{ answeredCount }} / {{ questions.length }}
+          </span>
+        </div>
+      </div>
+      <!-- Progress Bar -->
+      <div class="progress-bar-container">
+        <div class="progress-bar" [style.width.%]="progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="quiz-content">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <!-- Question Card -->
+      <div class="question-card">
+        <div class="category-badge">{{ currentQuestion.category }}</div>
+        <h2 class="question-text">{{ currentQuestion.question }}</h2>
+
+        <!-- Options -->
+        <div class="options-grid">
+          <button
+            *ngFor="let option of currentQuestion.options; let i = index"
+            (click)="selectOption(i)"
+            [class.selected]="currentAnswer.selectedOption === i"
+            class="option-btn"
+          >
+            <span class="option-letter">{{ getOptionLetter(i) }}</span>
+            <span class="option-text">{{ option }}</span>
+            <span
+              class="option-check"
+              *ngIf="currentAnswer.selectedOption === i"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="navigation-buttons">
+        <button
+          (click)="previousQuestion()"
+          [disabled]="currentQuestionIndex() === 0"
+          class="nav-btn nav-btn-prev"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Previous
+        </button>
+
+        <button (click)="nextQuestion()" class="nav-btn nav-btn-next">
+          {{ currentQuestionIndex() === questions.length - 1 ? 'Submit' : 'Next'
+          }}
+          <svg
+            *ngIf="currentQuestionIndex() < questions.length - 1"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Question Navigator Sidebar -->
+  <div class="question-navigator">
+    <h3 class="navigator-title">Questions</h3>
+    <div class="navigator-grid">
+      <button
+        *ngFor="let question of questions; let i = index"
+        (click)="goToQuestion(i)"
+        [class.current]="currentQuestionIndex() === i"
+        [class.answered]="answers()[i].selectedOption !== null"
+        class="navigator-btn"
+      >
+        {{ i + 1 }}
+      </button>
+    </div>
+    <button (click)="submitQuiz()" class="submit-btn">Submit Quiz</button>
+  </div>
+</div>

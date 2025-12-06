@@ -6,8 +6,7 @@
     "start": "nx serve platform",
     "start:api": "nx build core && docker-compose --env-file .env up -d --build",
     "test": "nx test core --coverage",
-    "seed": "ts-node --project apps/core/tsconfig.app.json -r tsconfig-paths/register apps/core/src/seed.ts",
-    "gen:comp": "nx g @nx/angular:component apps/platform/src//shared/uis/layout/portal-header"
+    "gen:comp": "nx g @nx/angular:component apps/platform/src/shared/uis/layout/portal-header"
   },
   "private": true,
   "dependencies": {
@@ -28,13 +27,11 @@
     "@nestjs/platform-express": "^11.0.0",
     "@nestjs/sequelize": "^11.0.1",
     "@nestjs/swagger": "^11.2.3",
-    "@taiga-ui/cdk": "^4.62.0",
-    "@taiga-ui/core": "^4.62.0",
     "@taiga-ui/icons": "^4.62.0",
-    "@taiga-ui/kit": "^4.62.0",
     "@tailwindcss/postcss": "^4.1.17",
     "axios": "^1.6.0",
     "bcrypt": "^6.0.0",
+    "chart.js": "^4.5.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "cookie-parser": "^1.4.7",

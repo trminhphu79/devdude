@@ -26,11 +26,7 @@
             "output": "assets/taiga-ui/icons"
           }
         ],
-        "styles": [
-          "apps/platform/src/styles.scss",
-          "@taiga-ui/core/styles/taiga-ui-theme.less",
-          "@taiga-ui/core/styles/taiga-ui-fonts.less"
-        ],
+        "styles": ["apps/platform/src/styles.scss"],
         "server": "apps/platform/src/main.server.ts",
         "ssr": {
           "entry": "apps/platform/src/server.ts"

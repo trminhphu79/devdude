@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Category } from '../../shared/models/category';
-import { CreateCategoryDto, UpdateCategoryDto } from '@devdude/common';
+import { CreateCategoryDto, UpdateCategoryDto } from '@devdude/common/dtos';
 
 @Injectable()
 export class CategoryService {

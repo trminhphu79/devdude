@@ -18,8 +18,9 @@ import {
   ApiQuery,
 } from '@nestjs/swagger';
 import { AccountAdminService } from './account-admin.service';
-import { CreateAdminDto, UpdateAccountDto, UserRole } from '@devdude/common';
 import { Roles } from '../auth/decorators/roles.decorator';
+import { CreateAdminDto, UpdateAccountDto } from '@devdude/common/dtos';
+import { UserRole } from '@devdude/common/enums';
 
 @ApiTags('Accounts')
 @ApiBearerAuth('X-Access-Token')

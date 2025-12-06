@@ -43,7 +43,7 @@ export class TemplateService {
       );
     }
 
-    return this.assessmentTemplateModel.create(createTemplateDto as any);
+    return this.assessmentTemplateModel.create({ ...createTemplateDto });
   }
 
   async findAll(): Promise<AssessmentTemplate[]> {

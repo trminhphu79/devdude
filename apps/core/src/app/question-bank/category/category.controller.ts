@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CategoryService } from './category.service';
-import { CreateCategoryDto, UpdateCategoryDto } from '@devdude/common';
+import { CreateCategoryDto, UpdateCategoryDto } from '@devdude/common/dtos';
 
 @ApiTags('Category')
 @Controller('category')

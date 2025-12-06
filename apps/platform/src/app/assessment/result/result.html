@@ -1,0 +1,143 @@
+<div class="result-container">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <!-- Header -->
+    <div class="result-header text-center mb-12">
+      <div class="level-badge" [style.background]="getLevelColor()">
+        <span class="level-icon">{{ getLevelIcon() }}</span>
+        <span class="level-text">{{ level }}</span>
+      </div>
+      <h1 class="result-title">Assessment Complete!</h1>
+      <p class="result-subtitle">Here's how you performed</p>
+    </div>
+
+    <!-- Score Card -->
+    <div class="score-card">
+      <div class="score-circle">
+        <svg class="score-ring" width="200" height="200">
+          <circle
+            cx="100"
+            cy="100"
+            r="90"
+            fill="none"
+            stroke="rgba(255,255,255,0.1)"
+            stroke-width="12"
+          />
+          <circle
+            cx="100"
+            cy="100"
+            r="90"
+            fill="none"
+            stroke="url(#gradient)"
+            stroke-width="12"
+            [attr.stroke-dasharray]="565.48"
+            [attr.stroke-dashoffset]="565.48 - (565.48 * totalScore / 100)"
+            transform="rotate(-90 100 100)"
+          />
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color: #667eea" />
+              <stop offset="100%" style="stop-color: #764ba2" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="score-text">
+          <div class="score-number">{{ totalScore }}</div>
+          <div class="score-label">Total Score</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📝</div>
+        <div class="stat-value">{{ stats.totalQuestions }}</div>
+        <div class="stat-label">Total Questions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-value">{{ stats.correctAnswers }}</div>
+        <div class="stat-label">Correct Answers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-value">{{ stats.timeTaken }}</div>
+        <div class="stat-label">Time Taken</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-value">{{ stats.accuracy }}%</div>
+        <div class="stat-label">Accuracy</div>
+      </div>
+    </div>
+
+    <!-- Radar Chart -->
+    <div class="chart-section">
+      <h2 class="section-title">Performance by Category</h2>
+      <div class="chart-container">
+        <canvas #radarChart></canvas>
+      </div>
+    </div>
+
+    <!-- Category Breakdown -->
+    <div class="category-section">
+      <h2 class="section-title">Category Breakdown</h2>
+      <div class="category-grid">
+        <div *ngFor="let category of categoryScores" class="category-card">
+          <div class="category-header">
+            <h3>{{ category.category }}</h3>
+            <span class="category-percentage">{{ category.percentage }}%</span>
+          </div>
+          <div class="category-progress">
+            <div
+              class="progress-bar"
+              [style.width.%]="category.percentage"
+            ></div>
+          </div>
+          <div class="category-score">
+            {{ category.score }} / {{ category.total }} correct
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Level Table -->
+    <div class="level-table-section">
+      <h2 class="section-title">Score Levels</h2>
+      <div class="level-table">
+        <div class="table-row table-header">
+          <div class="table-cell">Final Score</div>
+          <div class="table-cell">Level</div>
+        </div>
+        <div class="table-row" [class.current-level]="level === 'Early Junior'">
+          <div class="table-cell">&lt; 30</div>
+          <div class="table-cell">🌱 Early Junior</div>
+        </div>
+        <div class="table-row" [class.current-level]="level === 'Junior'">
+          <div class="table-cell">30–54</div>
+          <div class="table-cell">🌿 Junior</div>
+        </div>
+        <div class="table-row" [class.current-level]="level === 'Mid'">
+          <div class="table-cell">55–70</div>
+          <div class="table-cell">🌳 Mid</div>
+        </div>
+        <div class="table-row" [class.current-level]="level === 'Mid Late'">
+          <div class="table-cell">71–79</div>
+          <div class="table-cell">🏆 Mid Late</div>
+        </div>
+        <div class="table-row" [class.current-level]="level === 'Senior'">
+          <div class="table-cell">80–100</div>
+          <div class="table-cell">👑 Senior</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <a routerLink="/assessment" class="btn-secondary"
+        >Take Another Assessment</a
+      >
+      <a routerLink="/" class="btn-primary">Back to Home</a>
+    </div>
+  </div>
+</div>

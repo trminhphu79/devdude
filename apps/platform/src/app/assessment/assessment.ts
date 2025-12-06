@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-assessment',
-  imports: [RouterModule],
+  imports: [RouterOutlet],
   templateUrl: './assessment.html',
   styleUrls: ['./assessment.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

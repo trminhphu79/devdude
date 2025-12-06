@@ -1,39 +1,52 @@
-<section
-  class="flex flex-col items-center bg-white dark:bg-gray-900 justify-center w-full h-full"
->
-  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-    <div class="flex items-center justify-center mb-8">
-      <img
-        class="rounded-full"
-        src="second-logo.png"
-        alt=""
-        width="200"
-        height="200"
-      />
+<section class="not-found-container">
+  <!-- Animated Background -->
+  <div class="background-animation"></div>
+
+  <div class="content">
+    <!-- Logo -->
+    <div class="logo-container">
+      <div class="logo">&lt;DevDude /&gt;</div>
     </div>
-    <div class="mx-auto max-w-screen-sm text-center">
-      <h1
-        class="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 dark:text-primary-500"
-      >
-        404
-      </h1>
-      <p
-        class="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white"
-      >
-        Something's missing.
+
+    <!-- 404 Number with Glitch Effect -->
+    <div class="error-code">
+      <h1 class="glitch" data-text="404">404</h1>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message">
+      <h2>Oops! Page Not Found</h2>
+      <p>
+        The page you're looking for seems to have wandered off into the void.
+        Don't worry, even the best developers get lost sometimes.
       </p>
-      <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
-        Sorry, we can't find that page. You'll find lots to explore on the home
-        page.
-      </p>
-      <button
-        (click)="backHome()"
-        appearance="secondary"
-        tuiButton
-        type="button"
-      >
-        Back to Homepage
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button (click)="backHome()" class="btn-primary">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+        Back to Home
       </button>
+      <a routerLink="/assessment" class="btn-secondary">Take Assessment</a>
+    </div>
+
+    <!-- Fun Developer Message -->
+    <div class="developer-joke">
+      <code>// TODO: Find the missing page 🔍</code>
     </div>
   </div>
 </section>

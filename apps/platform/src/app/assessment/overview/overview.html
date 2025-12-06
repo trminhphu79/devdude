@@ -1,0 +1,206 @@
+<div class="overview-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <h1
+        class="hero-title text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6"
+      >
+        Ready to Test Your Skills?
+      </h1>
+      <p
+        class="hero-description text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto"
+      >
+        Take our comprehensive technical assessments and discover your true
+        skill level. Get instant feedback and track your progress over time.
+      </p>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-12 sm:mb-16">
+        <h2
+          class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4"
+        >
+          How It Works
+        </h2>
+        <p class="text-base sm:text-lg lg:text-xl text-[var(--text-secondary)]">
+          Follow these simple steps to complete your assessment
+        </p>
+      </div>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+      >
+        <div *ngFor="let step of guideSteps; let i = index" class="guide-card">
+          <div class="step-number">{{ i + 1 }}</div>
+          <div class="text-5xl sm:text-6xl mb-4">{{ step.icon }}</div>
+          <h3 class="text-lg sm:text-xl font-bold mb-3">{{ step.title }}</h3>
+          <p
+            class="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed"
+          >
+            {{ step.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Important Tips Section -->
+  <section
+    class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-[rgba(102,126,234,0.03)]"
+  >
+    <div class="max-w-6xl mx-auto">
+      <div class="tips-card">
+        <div
+          class="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-8 sm:mb-10"
+        >
+          <span class="text-4xl sm:text-5xl">💡</span>
+          <h2
+            class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center sm:text-left"
+          >
+            Important Tips for Accurate Results
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          <div *ngFor="let feature of features" class="flex gap-4 items-start">
+            <span class="text-3xl sm:text-4xl flex-shrink-0"
+              >{{ feature.icon }}</span
+            >
+            <div class="flex-1">
+              <h4 class="text-base sm:text-lg font-bold mb-2">
+                {{ feature.title }}
+              </h4>
+              <p
+                class="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed"
+              >
+                {{ feature.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Honesty Notice -->
+  <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="honesty-card">
+        <div class="text-5xl sm:text-6xl lg:text-7xl mb-6">🎯</div>
+        <h3
+          class="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-4 sm:mb-6"
+        >
+          Be Honest, Get Accurate Results
+        </h3>
+        <p
+          class="text-base sm:text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed mb-8 max-w-2xl mx-auto"
+        >
+          The assessment is designed to match your current skill level. Being
+          honest in your answers ensures you receive results that truly reflect
+          your abilities. This helps you:
+        </p>
+        <ul class="space-y-3 sm:space-y-4 max-w-2xl mx-auto">
+          <li
+            class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-[rgba(102,126,234,0.05)] text-sm sm:text-base font-medium"
+          >
+            <svg
+              class="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--primary-purple)"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Identify your actual strengths and weaknesses</span>
+          </li>
+          <li
+            class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-[rgba(102,126,234,0.05)] text-sm sm:text-base font-medium"
+          >
+            <svg
+              class="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--primary-purple)"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Get personalized learning recommendations</span>
+          </li>
+          <li
+            class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-[rgba(102,126,234,0.05)] text-sm sm:text-base font-medium"
+          >
+            <svg
+              class="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--primary-purple)"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Track meaningful progress over time</span>
+          </li>
+          <li
+            class="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-[rgba(102,126,234,0.05)] text-sm sm:text-base font-medium"
+          >
+            <svg
+              class="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--primary-purple)"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Build confidence in your real abilities</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section
+    class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-[rgba(102,126,234,0.05)]"
+  >
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4">
+        Choose Your Assessment Topic
+      </h2>
+      <p
+        class="text-base sm:text-lg lg:text-xl text-[var(--text-secondary)] mb-10 sm:mb-12"
+      >
+        Select a topic below to begin your assessment journey
+      </p>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 sm:mb-12"
+      >
+        <button
+          *ngFor="let topic of topics"
+          routerLink="../assessment/quiz"
+          [queryParams]="{ topic: topic.id }"
+          class="topic-btn group"
+        >
+          <span class="text-4xl sm:text-5xl mb-3">{{ topic.icon }}</span>
+          <span class="text-lg sm:text-xl lg:text-2xl font-bold mb-2 block">
+            {{ topic.name }}
+          </span>
+          <span class="text-xs sm:text-sm text-[var(--text-secondary)] block">
+            {{ topic.totalQuestions }} Questions • {{ topic.durationMinutes }}
+            min
+          </span>
+        </button>
+      </div>
+      <div class="mt-8">
+        <a routerLink="/" class="btn-secondary inline-block">← Back to Home</a>
+      </div>
+    </div>
+  </section>
+</div>

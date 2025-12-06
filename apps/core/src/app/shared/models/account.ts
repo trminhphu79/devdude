@@ -7,7 +7,7 @@ import {
   Index,
 } from 'sequelize-typescript';
 import { Attempt } from './attempt';
-import { UserRole } from '@devdude/common';
+import { UserRole } from '@devdude/common/enums';
 
 @Table({
   tableName: 'accounts',

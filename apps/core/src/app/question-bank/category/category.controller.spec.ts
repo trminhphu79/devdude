@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CategoryController } from './category.controller';
 import { CategoryService } from './category.service';
-import { CreateCategoryDto, UpdateCategoryDto } from '@devdude/common';
+import { CreateCategoryDto, UpdateCategoryDto } from '@devdude/common/dtos';
 
 const mockCategoryService = {
   create: jest.fn(),

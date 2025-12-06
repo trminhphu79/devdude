@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { TuiButton } from '@taiga-ui/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-not-found',
-  imports: [TuiButton],
+  imports: [RouterLink],
   templateUrl: './not-found.html',
   styleUrl: './not-found.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

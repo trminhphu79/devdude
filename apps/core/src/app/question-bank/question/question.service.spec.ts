@@ -5,12 +5,8 @@ import { Sequelize } from 'sequelize-typescript';
 import { QuestionService } from './question.service';
 import { Question } from '../../shared/models/question';
 import { AnswerOption } from '../../shared/models/answer-option';
-import {
-  CreateQuestionDto,
-  QuestionType,
-  DifficultyLevel,
-  UpdateQuestionDto,
-} from '@devdude/common';
+import { CreateQuestionDto, UpdateQuestionDto } from '@devdude/common/dtos';
+import { QuestionType, DifficultyLevel } from '@devdude/common/enums';
 
 const mockTransaction = {
   commit: jest.fn(),

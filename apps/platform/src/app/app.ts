@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TuiRoot } from '@taiga-ui/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  imports: [RouterModule, TuiRoot],
+  imports: [RouterModule, ReactiveFormsModule],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
@@ -11,4 +11,12 @@ import { TuiRoot } from '@taiga-ui/core';
 })
 export class App {
   protected title = 'platform';
+  private fb = inject(FormBuilder);
+  form = this.fb.group({
+    otp: [''],
+  });
+
+  onOtpComplete(e: any) {
+    console.log(e);
+  }
 }

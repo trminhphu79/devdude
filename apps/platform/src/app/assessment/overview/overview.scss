@@ -1,0 +1,435 @@
+.overview-container {
+  min-height: 100vh;
+  background: var(--dark-bg);
+  padding-top: 80px; // Account for fixed header
+}
+
+// Hero Section
+.hero-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(102, 126, 234, 0.1) 0%,
+    transparent 100%
+  );
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(102, 126, 234, 0.1) 0%,
+      transparent 70%
+    );
+    animation: pulse 15s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #667eea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+// Guide Section
+.guide-section {
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+  }
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.guide-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-gradient);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: rgba(102, 126, 234, 0.5);
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+
+  .step-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  .step-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+}
+
+// Tips Section
+.tips-section {
+  padding: 4rem 2rem;
+  background: rgba(102, 126, 234, 0.03);
+}
+
+.tips-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 3rem;
+}
+
+.tips-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .tips-icon {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+}
+
+.tips-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.tip-item {
+  display: flex;
+  gap: 1rem;
+  align-items: start;
+
+  .tip-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .tip-text {
+    h4 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 0.9375rem;
+    }
+  }
+}
+
+// Honesty Section
+.honesty-section {
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.honesty-card {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.1) 0%,
+    rgba(118, 75, 162, 0.1) 100%
+  );
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
+
+  .honesty-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-weight: 500;
+
+    svg {
+      flex-shrink: 0;
+      stroke: #667eea;
+    }
+  }
+}
+
+// CTA Section
+.cta-section {
+  padding: 4rem 2rem 6rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(102, 126, 234, 0.05) 100%
+  );
+}
+
+.cta-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  > p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+  }
+}
+
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.topic-btn {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 15px;
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-primary);
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: rgba(102, 126, 234, 0.5);
+    box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+    background: rgba(102, 126, 234, 0.05);
+  }
+
+  .topic-icon {
+    font-size: 3rem;
+  }
+
+  .topic-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .topic-meta {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+}
+
+.cta-footer {
+  margin-top: 2rem;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: inline-block;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .guide-grid,
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tips-content {
+    grid-template-columns: 1fr;
+  }
+
+  .tips-card,
+  .honesty-card {
+    padding: 2rem;
+  }
+
+  .honesty-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .tips-header {
+    flex-direction: column;
+    text-align: center;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+}
